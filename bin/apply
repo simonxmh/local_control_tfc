@@ -1,0 +1,19 @@
+#!/usr/bin/env bash
+
+workspace=${1:-default}
+
+terraform workspace select $workspace
+
+terraform apply \
+  -target=tfe_team.visible_teams \
+  -target=tfe_workspace.run_triggering_workspaces \
+  -target=tfe_workspace.run_triggered_workspaces \
+  -target=tfe_workspace.one_thousand \
+  -target=tfe_workspace.five_thousand \
+  -target=tfe_workspace.ten_thousand \
+  -var-file=$workspace.tfvars \
+  -auto-approve
+
+terraform apply -var-file=$workspace.tfvars -auto-approve
+
+terraform workspace select default

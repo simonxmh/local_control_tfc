@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+
+# Starting over with the default workspace
+#
+# This is usually done if you have to nuke your local tfe and need to start from scratch
+
+rm terraform.tfstate
