@@ -8,7 +8,6 @@ terraform {
 
 provider "tfe" {
   hostname = var.hostname
-  token = var.token
 }
 
 data "tfe_organization_membership" "user" {
@@ -40,19 +39,19 @@ resource "tfe_workspace" "parent" {
 // token_key should be a value based on the rules here : https://www.terraform.io/cli/config/config-file#environment-variable-credentials
 // token_value should be the same token you use to apply this config from the CLI.
 
-# resource "tfe_variable" "token" {
-#   key = var.tfc_cred_key
-#   value = var.tfc_cred_token
-#   category = "env"
-#   sensitive = "true"
-#   workspace_id = tfe_workspace.parent.id
-#   description = "This allows the build agent to call back to TFC when executing plans and applies"
-# }
+resource "tfe_variable" "token" {
+  key = var.tfc_cred_key
+  value = var.tfc_cred_token
+  category = "env"
+  sensitive = "true"
+  workspace_id = tfe_workspace.parent.id
+  description = "This allows the build agent to call back to TFC when executing plans and applies"
+}
 
-# resource "tfe_variable" "organization" {
-#   key = "organization"
-#   value = var.organization
-#   category = "terraform"
-#   workspace_id = tfe_workspace.parent.id
-#   description = "Passing along the var settings from this config to the config that parent workspace will use to generate the child workspace"
-# }
+resource "tfe_variable" "organization" {
+  key = "organization"
+  value = var.organization
+  category = "terraform"
+  workspace_id = tfe_workspace.parent.id
+  description = "Passing along the var settings from this config to the config that parent workspace will use to generate the child workspace"
+}

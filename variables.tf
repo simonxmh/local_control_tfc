@@ -22,3 +22,11 @@ variable "repo" {
   type = string
 }
 
+variable "tfc_cred_key" {
+  type = string
+}
+
+variable "tfc_cred_token" {
+  type = string
+}
+
