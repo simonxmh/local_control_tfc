@@ -8,6 +8,7 @@ terraform {
 
 provider "tfe" {
   hostname = var.hostname
+  token = var.token
 }
 
 data "tfe_organization_membership" "user" {
