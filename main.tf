@@ -8,6 +8,7 @@ terraform {
 
 provider "tfe" {
   hostname = var.hostname
+  token = var.tfc_cred_token
 }
 
 data "tfe_organization_membership" "user" {
@@ -40,7 +41,7 @@ resource "tfe_workspace" "parent" {
 // token_value should be the same token you use to apply this config from the CLI.
 
 resource "tfe_variable" "token" {
-  key = var.tfc_cred_key
+  key = "TFE_TOKEN"
   value = var.tfc_cred_token
   category = "env"
   sensitive = "true"
@@ -51,6 +52,14 @@ resource "tfe_variable" "token" {
 resource "tfe_variable" "organization" {
   key = "organization"
   value = var.organization
+  category = "terraform"
+  workspace_id = tfe_workspace.parent.id
+  description = "Passing along the var settings from this config to the config that parent workspace will use to generate the child workspace"
+}
+
+resource "tfe_variable" "hostname" {
+  key = "hostname"
+  value = var.hostname
   category = "terraform"
   workspace_id = tfe_workspace.parent.id
   description = "Passing along the var settings from this config to the config that parent workspace will use to generate the child workspace"
