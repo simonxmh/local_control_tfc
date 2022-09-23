@@ -46,12 +46,6 @@ resource "tfe_variable" "token" {
   sensitive = "true"
   workspace_id = tfe_workspace.parent.id
   description = "This allows the build agent to call back to TFC when executing plans and applies"
-  # lifecycle {
-  #   postcondition {
-  #     condition = self.key == "TFE_TOKEN"
-  #     error_message = "post condition failed"
-  #   }
-  # }
 }
 
 resource "tfe_variable" "organization" {
@@ -60,13 +54,6 @@ resource "tfe_variable" "organization" {
   category = "terraform"
   workspace_id = tfe_workspace.parent.id
   description = "Passing along the var settings from this config to the config that parent workspace will use to generate the child workspace"
-
-  # lifecycle {
-  #   precondition {
-  #     condition = tfe_workspace.parent.name == "Parent-fail"
-  #     error_message = "pre condition failed"
-  #   }
-  # }
 }
 
 resource "tfe_variable" "hostname" {
@@ -76,3 +63,13 @@ resource "tfe_variable" "hostname" {
   workspace_id = tfe_workspace.parent.id
   description = "Passing along the var settings from this config to the config that parent workspace will use to generate the child workspace"
 }
+
+resource "tfe_variable" "test-var" {
+  key = "test_var"
+  value = var.random_var
+  category = "env"
+  workspace_id = tfe_workspace.parent.id
+  description = "This allows the build agent to call back to TFC when executing plans and applies"
+}
+
+

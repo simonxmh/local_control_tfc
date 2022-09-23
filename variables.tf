@@ -30,3 +30,7 @@ variable "tfc_cred_token" {
   type = string
 }
 
+variable "random_var" {
+  type = string
+  default = "test_Var"
+}
