@@ -34,3 +34,11 @@ variable "random_var" {
   type = string
   default = "test_Var"
 }
+
+variable "agent_pool_id" {
+  type = string
+}
+
+variable "num_instance" {
+  type = number
+}
