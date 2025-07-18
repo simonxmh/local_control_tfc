@@ -6,6 +6,10 @@ variable "github_oauth_token" {
   type = string
 }
 
+#variable "oauth_token_id" {
+#  type = string
+#}
+
 variable "organization" {
   type = string
 }
@@ -35,9 +39,10 @@ variable "random_var" {
   default = "test_Var"
 }
 
-# variable "agent_pool_id" {
-#   type = string
-# }
+variable "agent_pool_id" {
+  type = string
+  default = ""
+}
 
 variable "num_instance" {
   type = number
